@@ -1,86 +1,62 @@
-
-
-html_content = """
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background-color: #050a14; color: white; font-family: sans-serif; padding: 20px; }
-        .card { background-color: #0b1528; border: 1px solid #1a3a60; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
-        h1, h2 { color: #00ff41; }
-        .phone-form-input { width: 100%; background-color: #0b1528; border: 1px solid #1a3a60; padding: 15px; border-radius: 8px; color: white; margin-bottom: 15px; font-size: 1.2rem; }
-        button { width: 100%; padding: 20px; background-color: #00ff41; border: none; border-radius: 8px; font-size: 1.5rem; font-weight: bold; cursor: pointer; }
-        .red-text { color: #ff3333; font-weight: bold; font-size: 1.3rem; }
-        .green-text { color: #00ff41; font-weight: bold; }
-        .big-btn { margin-top: 10px; }
+        body { background-color: #050a14; color: white; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .card { background-color: #0b1528; border: 1px solid #1a3a60; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2 { color: #00ff41; border-bottom: 2px solid #1a3a60; padding-bottom: 10px; }
+        .phone-form-input { width: 100%; background-color: #050a14; border: 1px solid #1a3a60; padding: 15px; border-radius: 8px; color: white; margin-bottom: 15px; font-size: 1.1rem; box-sizing: border-box; }
+        .red-text { color: #ff3333; font-weight: bold; font-size: 1.4rem; }
+        .green-text { color: #00ff41; font-weight: bold; font-size: 1.2rem; }
+        button { width: 100%; padding: 25px; background-color: #00ff41; color: #050a14; border: none; border-radius: 12px; font-size: 1.6rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #00cc33; }
     </style>
-</head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+</head>
 <body>
 
     <div class="card">
         <h2>🌐 الدارك ويب</h2>
-        <input type="text" class="phone-form-input" placeholder="ادخل السلعة التي تريد بيعها...">
-        <input type="number" class="phone-form-input" placeholder="السعر المطلوب...">
+        <input type="text" id="item" class="phone-form-input" placeholder="ادخل السلعة التي تريد بيعها...">
+        <input type="number" id="price" class="phone-form-input" placeholder="السعر المطلوب...">
         <button onclick="alert('تم عرض السلعة في الدارك ويب')">بيع السلعة</button>
     </div>
 
     <div class="card">
         <h2>🚨 العساكر المطلوبون (10)</h2>
-        <p class="red-text">نواف العتيبي (وزير): 50,000,000$</p>
-        <p class="red-text">يزيد عسيري (نائب): 40,000,000$</p>
-        <p class="red-text">بقية العساكر: 10,000,000$</p>
+        <p class="red-text">نواف العتيبي (وزير): 50M</p>
+        <p class="red-text">يزيد عسيري (نائب): 40M</p>
+        <p class="red-text">بقية العساكر: 10M</p>
     </div>
 
     <div class="card">
         <h2>👑 القيادات</h2>
         <p>قانق مانيجر: <span class="green-text">أبو مبارك</span></p>
-        <p>بقية القيادات: <span class="red-text">لا يوجد</span></p>
+        <p>بقية القيادات: <span style="color:red">لا يوجد</span></p>
     </div>
 
     <div class="card">
         <h2>💓 تطبيق جس النبض</h2>
         <input type="text" id="criminalName" class="phone-form-input" placeholder="اسم المجرم الجديد...">
         <input type="text" id="criminalRank" class="phone-form-input" placeholder="المنصب...">
-        <button class="big-btn" onclick="sendToDiscord()">تسجيل وإرسال للديسكورد</button>
+        <button onclick="sendToDiscord()">إرسال للديسكورد</button>
     </div>
 
     <script>
         function sendToDiscord() {
             const name = document.getElementById('criminalName').value;
             const rank = document.getElementById('criminalRank').value;
-            const webhookUrl = "https://discord.com/api/webhooks/1507880211683737603/4p2aYOFKJR63k0Nd7HdVQdfpt4paQBIQ7gW75A-TsOdTWT5pmdu4h2D-Yz7WOvS1s4hu";
+            const webhookUrl = "ضع_رابط_الويب_هوك_هنا"; // ضع رابطك هنا
             
-            const payload = {
-                content: "🚨 **تم رصد مجرم جديد في دولة SM** \\n**الاسم:** " + name + "\\n**المنصب:** " + rank
-            };
-
             fetch(webhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(() => alert('تم إرسال البيانات إلى الديسكورد بنجاح'));
+                body: JSON.stringify({ 
+                    content: "🚨 **تم رصد مجرم جديد في دولة SM**\n**الاسم:** " + name + "\n**المنصب:** " + rank 
+                })
+            }).then(() => alert('تم إرسال البيانات إلى الديسكورد'));
         }
     </script>
 </body>
 </html>
-"""
-
-with open("gang_system.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-"""
-
-button {
-    width: 100%;
-    padding: 25px; /* زر كبير */
-    background-color: #00ff41;
-    color: #050a14;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.5rem; /* نص كبير */
-    font-weight: bold;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
